@@ -1,33 +1,3 @@
-# Pastas de build
-bin/
-obj/
-
-# Pasta de cache e configura��es do Visual Studio
-.vs/
-
-# Arquivos de usu�rio, cache e tempor�rios
-*.user
-*.userosscache
-*.suo
-*.cache
-*.tmp
-
-# Arquivos de log e relat�rios de teste
-*.log
-TestResults/
-
-# Pastas do NuGet
-.nuget/
-
-# Outros arquivos tempor�rios ou de configura��o gerados
-*.dbmdl
-*.bak
-*.Backup
-
-# Configura��es do Rider
-.idea/
-
-
 # .NET Core
 bin/
 obj/
