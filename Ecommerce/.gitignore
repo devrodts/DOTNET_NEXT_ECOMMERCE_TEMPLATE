@@ -1,0 +1,28 @@
+# Pastas de build
+bin/
+obj/
+
+# Pasta de cache e configurações do Visual Studio
+.vs/
+
+# Arquivos de usuário, cache e temporários
+*.user
+*.userosscache
+*.suo
+*.cache
+*.tmp
+
+# Arquivos de log e relatórios de teste
+*.log
+TestResults/
+
+# Pastas do NuGet
+.nuget/
+
+# Outros arquivos temporários ou de configuração gerados
+*.dbmdl
+*.bak
+*.Backup
+
+# Configurações do Rider
+.idea/
