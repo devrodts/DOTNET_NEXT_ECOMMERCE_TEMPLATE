@@ -2,33 +2,44 @@
 
 namespace Ecommerce.src.Services.UsersService.UsersService.Domain.Entities
 {
-    namespace Ecommerce.src.Services.UsersService.UsersService.Domain.Entities
+    public class User
     {
-        public class User
+        public Guid UserId { get; private set; }
+        public string Email { get; private set; }
+        public string Name { get; private set; }
+        public string PasswordHash { get; private set; }
+
+        protected User()
         {
-            private HMACSHA3_256 _hmac;
-            public Guid userId { get; private set; }
-            public string Email { get; private set; }
-            public string Name { get; private set; }
-            public string _passwordHash { get; private set; }
+            Email = string.Empty;
+            Name = string.Empty;
+            PasswordHash = string.Empty;
+        }
 
-            protected User()
-            {
-                Email = string.Empty;
-                Name = string.Empty;
-                _passwordHash = string.Empty;
-                _hmac = new HMACSHA3_256();
-            }
+        public User(string email, string passwordHash)
+        {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentException("Email cannot be null or empty.");
 
-            public User(string email, string passwordHash)
-            {
-                userId = Guid.NewGuid();
+            if (string.IsNullOrEmpty(passwordHash))
+                throw new ArgumentException("PasswordHash cannot be null or empty.");
+
+            try{
+                UserId = Guid.NewGuid();
                 Email = email;
-                _passwordHash = passwordHash;
-                Name = string.Empty;
-                _passwordHash = passwordHash;
-                _hmac = new HMACSHA3_256();
+                PasswordHash = passwordHash;
+            }catch(Exception e){
+                Console.WriteLine("Ocorreu um erro:", e);
+                return null;
+
             }
-}
+        }
+
+        public string GeneratePasswordHash(string password, byte[] key)
+        {
+            using var hmac = new HMACSHA256(key);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            return BitConverter.ToString(hmac.ComputeHash(passwordBytes)).Replace("-", "").ToLower();
+        }
     }
 }
