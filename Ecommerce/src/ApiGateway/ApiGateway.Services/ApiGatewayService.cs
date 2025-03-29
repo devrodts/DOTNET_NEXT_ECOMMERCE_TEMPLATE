@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.ApiGateway.ApiGateway.Services
+﻿namespace Ecommerce.src.ApiGateway.ApiGateway.Services
 {
     public class ApiGatewayService
     {
