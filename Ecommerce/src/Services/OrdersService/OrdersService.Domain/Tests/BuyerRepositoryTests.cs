@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using Xunit;
     using Ecommerce.src.Services.OrdersService.OrdersService.Domain.AggregatesModel.BuyerAggregate;
@@ -16,19 +15,19 @@
         public async Task FindByIdAsync_ReturnsBuyer_WhenBuyerExists()
         {
             var expectedId = Guid.NewGuid();
-            var expectedBuyer = Buyer(expectedId, "some-identity");
+            var expectedBuyer = CreateBuyer(expectedId, "some-identity");
 
             var repository = new InMemoryBuyerRepository();
-            repository.Add(expectedBuyer)
+            repository.Add(expectedBuyer);
             var buyer = await repository.FindByIdAsync(expectedId);
 
             Assert.NotNull(buyer);
             Assert.Equal(expectedId, buyer.Id);
         }
 
-        private Buyer Buyer(Guid expectedId, string v)
+        private Buyer CreateBuyer(Guid id, string identityGuid)
         {
-            throw new NotImplementedException();
+            return new Buyer(identityGuid, "Buyer Name"); // Adjusted constructor parameters
         }
 
         [Fact]
@@ -51,8 +50,7 @@
 
         public Buyer Add(Buyer buyer)
         {
-            if (buyer == null)
-                throw new ArgumentNullException(nameof(buyer));
+            ArgumentNullException.ThrowIfNull(buyer, nameof(buyer));
 
             _buyers[buyer.Id] = buyer;
             return buyer;
@@ -60,8 +58,7 @@
 
         public Buyer Update(Buyer buyer)
         {
-            if (buyer == null)
-                throw new ArgumentNullException(nameof(buyer));
+            ArgumentNullException.ThrowIfNull(buyer, nameof(buyer));
 
             _buyers[buyer.Id] = buyer;
             return buyer;

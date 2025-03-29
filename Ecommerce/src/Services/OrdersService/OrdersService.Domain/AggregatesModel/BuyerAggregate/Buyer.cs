@@ -8,7 +8,7 @@ namespace Ecommerce.src.Services.UsersService.UsersService.Domain.AggregatesMode
 {
 
     public class Buyer
-            : Entity, IAggregateRoot
+                : Entity, IAggregateRoot
     {
         [Required]
         public string IdentityGuid { get; private set; }
@@ -22,8 +22,8 @@ namespace Ecommerce.src.Services.UsersService.UsersService.Domain.AggregatesMode
 
         protected Buyer()
         {
-            IdentityGuid = string.Empty; 
-            Name = string.Empty; 
+            IdentityGuid = string.Empty;
+            Name = string.Empty;
             _paymentMethods = new List<PaymentMethod>();
         }
 
@@ -33,14 +33,21 @@ namespace Ecommerce.src.Services.UsersService.UsersService.Domain.AggregatesMode
             Name = !string.IsNullOrWhiteSpace(name) ? name : throw new ArgumentNullException(nameof(name));
         }
 
+
         public PaymentMethod VerifyOrAddPaymentMethod(
-            int cardTypeId, string alias, string cardNumber,
-            string securityNumber, string cardHolderName, DateTime expiration, Guid orderId)
+            int cardTypeId, 
+            string alias, 
+            string cardNumber,
+            string securityNumber, 
+            string cardHolderName, 
+            DateTime expiration, 
+            Guid orderId
+         )
         {
             var existingPayment = _paymentMethods
                 .SingleOrDefault(p => p.IsEqualTo(cardTypeId, cardNumber, expiration));
 
-            if (existingPayment != null)
+            if (existingPayment is not null)
             {
                 AddDomainEvent(new BuyerAndPaymentMethodVerifiedDomainEvent(this, existingPayment, orderId));
 

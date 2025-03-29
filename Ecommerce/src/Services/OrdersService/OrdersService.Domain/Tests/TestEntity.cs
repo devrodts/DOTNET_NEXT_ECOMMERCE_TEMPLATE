@@ -2,7 +2,7 @@
 using MediatR;
 using Xunit;
 
-namespace Ecommerce.src.Services.OrdersService.Tests
+namespace Ecommerce.src.Services.OrdersService.OrdersService.Domain.Tests
 {
     public class TestEntityTests
     {
