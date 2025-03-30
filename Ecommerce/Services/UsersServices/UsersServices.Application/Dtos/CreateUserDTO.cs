@@ -1,4 +1,4 @@
-namespace Ecommerce.src.Services.UsersServices.UsersServices.Application.Dtos
+namespace Ecommerce.Services.UsersServices.UsersServices.Application.Dtos
 {
     public record CreateUserDTO(
         string email,

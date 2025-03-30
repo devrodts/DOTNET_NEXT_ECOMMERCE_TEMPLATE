@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
+using Ecommerce.Services.UsersServices.Endpoint; // Using atualizado
 
-namespace Ecommerce.Services.UsersServices // Note que não está mais em "Ecommerce"
+namespace Ecommerce.Services.UsersServices
 {
     public class Program
     {
@@ -20,13 +21,8 @@ namespace Ecommerce.Services.UsersServices // Note que não está mais em "Ecomm
                 app.UseSwaggerUI();
             }
 
-            app.MapPost("users", () => {
-                return "Hello, World!";
-            });
-
-            // app.UseHttpsRedirection();
+            app.MapUsersEndpoints();
             app.Run();
-
         }
     }
 }
