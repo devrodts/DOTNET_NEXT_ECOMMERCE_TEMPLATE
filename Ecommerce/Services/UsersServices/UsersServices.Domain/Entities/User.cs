@@ -29,7 +29,6 @@ namespace Ecommerce.Services.UsersServices.UsersServices.Domain.Entities
             UserId = Guid.NewGuid();
             Email = email;
             PasswordHash = passwordHash;
-            // Atribui um valor padrão para Name, evitando o aviso.
             Name = string.Empty;
         }
 
