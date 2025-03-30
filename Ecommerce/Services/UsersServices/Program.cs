@@ -20,8 +20,13 @@ namespace Ecommerce.Services.UsersServices // Note que não está mais em "Ecomm
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
+            app.MapPost("users", () => {
+                return "Hello, World!";
+            });
+
+            // app.UseHttpsRedirection();
             app.Run();
+
         }
     }
 }
