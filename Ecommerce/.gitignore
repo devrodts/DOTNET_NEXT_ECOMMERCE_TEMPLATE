@@ -1,3 +1,7 @@
+.vs
+Ecommerce.sln
+.vscode
+
 # .NET Core
 bin/
 obj/
