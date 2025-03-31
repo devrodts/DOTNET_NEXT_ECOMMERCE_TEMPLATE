@@ -1,9 +1,9 @@
-using Ecommerce.Services.UsersServices.UsersServices.Domain.Entities;
-namespace Ecommerce.Services.UsersServices.UsersServices.Domain.Interfaces.IUserRepository
+using System;
+using System.Threading.Tasks;
+using Ecommerce.Services.UsersServices.Domain.Entities;
+
+namespace Ecommerce.Services.UsersServices.Domain.Interfaces
 {
-
-    private User user;
-
     public interface IUserRepository
     {
         Task<User?> GetByEmailAsync(string email);
@@ -12,6 +12,5 @@ namespace Ecommerce.Services.UsersServices.UsersServices.Domain.Interfaces.IUser
         Task DeleteAsync(Guid userId);
         Task UpdatePassword(string email, string passwordHash);
         Task UpdateName(string name);
-
     }
 }

@@ -1,10 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Ecommerce.Services.UsersServices;
-using Ecommerce.Services.UsersServices.Application;          
-using Ecommerce.Services.UsersServices.UsersServices.Domain.Entities;
-using Ecommerce.Services.UsersServices.UsersServices.Application.Interfaces;
-using Ecommerce.Services.UsersServices.UsersServices.Infrastructure.Repositories;
+using Ecommerce.Services.UsersServices.Domain.Interfaces;
+using Ecommerce.Services.UsersServices.Domain.Entities;
+using Ecommerce.Services.UsersServices.Application.UseCases.RegisterUseCase;
+
 namespace Ecommerce.Services.UsersServices.Application.UseCases.RegisterUseCase
 {
     public class RegisterUserHandler
@@ -20,20 +19,13 @@ namespace Ecommerce.Services.UsersServices.Application.UseCases.RegisterUseCase
 
         public async Task HandleAsync(RegisterUserCommand command)
         {
-            try
-            {
-                if (await _userRepository.GetByEmailAsync(command.Email) != null)
-                    throw new InvalidOperationException("Email is already registered.");
+            if (await _userRepository.GetByEmailAsync(command.Email) != null)
+                throw new InvalidOperationException("Email is already registered.");
 
-                string passwordHash = _passwordHasher.HashPassword(command.Password);
-                var user = new User(command.Email, passwordHash);
-                await _userRepository.AddAsync(user);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An error has occurred: {0}", e);
-                throw;
-            }
+            string passwordHash = _passwordHasher.HashPassword(command.Password);
+            var user = new User(command.Email, passwordHash);
+
+            await _userRepository.AddAsync(user);
         }
     }
 }

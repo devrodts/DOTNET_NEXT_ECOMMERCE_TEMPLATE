@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System;
+using Ecommerce.Services.UsersServices.Domain.Entities;
 
 namespace Ecommerce.Services.UsersServices.Domain.Entities
 {

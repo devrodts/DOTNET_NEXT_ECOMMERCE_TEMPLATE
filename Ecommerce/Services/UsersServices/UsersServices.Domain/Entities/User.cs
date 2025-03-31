@@ -1,8 +1,8 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using System;
 using System.Text;
 
-namespace Ecommerce.Services.UsersServices.UsersServices.Domain.Entities
+namespace Ecommerce.Services.UsersServices.Domain.Entities
 {
     public class User
     {
@@ -28,8 +28,24 @@ namespace Ecommerce.Services.UsersServices.UsersServices.Domain.Entities
 
             UserId = Guid.NewGuid();
             Email = email;
+            Name = string.Empty; // Initialize with empty string
             PasswordHash = passwordHash;
-            Name = string.Empty;
+        }
+
+        public void UpdateName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException("Name cannot be null or empty.");
+                
+            Name = name;
+        }
+
+        public void UpdatePasswordHash(string passwordHash)
+        {
+            if (string.IsNullOrEmpty(passwordHash))
+                throw new ArgumentException("PasswordHash cannot be null or empty.");
+                
+            PasswordHash = passwordHash;
         }
 
         public string GeneratePasswordHash(string password, byte[] key)
