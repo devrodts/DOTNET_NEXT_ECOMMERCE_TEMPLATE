@@ -19,7 +19,6 @@ namespace Ecommerce.Services.UsersServices.Domain.Common
 
         public override int GetHashCode()
         {
-            // Multiplica os hash codes dos componentes. Usamos unchecked para permitir overflow sem exceção.
             return GetEqualityComponents()
                 .Aggregate(1, (current, obj) =>
                 {
